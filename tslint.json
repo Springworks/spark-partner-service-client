@@ -1,0 +1,13 @@
+{
+  "extends": ["tslint:latest", "typestrict", "@springworks/tslint-config", "tslint-config-prettier"],
+  "rules": {
+    "interface-name": false,
+    "no-angle-bracket-type-assertion": true,
+    "no-implicit-dependencies": [true, "dev"],
+    "no-unnecessary-type-assertion": true,
+    "object-literal-sort-keys": false,
+    "promise-function-async": true,
+    "no-unused-variable": false,
+    "variable-name": false
+  }
+}
