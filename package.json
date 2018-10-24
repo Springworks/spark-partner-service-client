@@ -1,0 +1,46 @@
+{
+  "name": "spark-oidc-client",
+  "description": "Metric reporter with helpful utilities for creating metrics.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json",
+    "fix": "tslint --project tsconfig.json --fix",
+    "test": "jest",
+    "build": "rm -rf build/* && tsc && cp package.json build/ && cp README.md build/"
+  },
+  "dependencies": {
+    "iron": "^5.0.4",
+    "openid-client": "^2.4.2"
+  },
+  "devDependencies": {
+    "@springworks/tslint-config": "^2.0.0",
+    "@types/hapi": "^17.6.2",
+    "@types/iron": "^5.0.1",
+    "@types/jest": "^23.3.7",
+    "@types/koa-router": "^7.0.32",
+    "@types/node": "^10.12.0",
+    "@types/request": "^2.47.1",
+    "get-port": "^4.0.0",
+    "hapi": "^17.6.0",
+    "jest": "^23.6.0",
+    "koa-router": "^7.4.0",
+    "oidc-provider": "^5.1.2",
+    "prettier": "^1.14.3",
+    "request": "^2.88.0",
+    "ts-jest": "^23.10.2",
+    "ts-mockito": "^2.3.1",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-plugin-prettier": "^2.0.0",
+    "typescript": "^3.1.1",
+    "typestrict": "^1.0.1"
+  },
+  "engines": {
+    "node": "^10.11.0"
+  },
+  "license": "MIT",
+  "repository": "git@github.com:Springworks/spark-oidc-client.git",
+  "author": "Springworks"
+}
