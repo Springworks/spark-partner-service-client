@@ -66,8 +66,6 @@ class HapiSessionManager implements SessionManager {
 }
 ```
 
-`spark-oidc-client` is storing already encrypted values by modified `client_secret`, but we recommend you to encrypt your session cookies by more secure key.
-
 ### How to use sdk
 
 To use `spark-oidc-client` sdk you need to create an instance of `SparkOidcClient` class with predefined [OidcClientOptions](#oidc_client_options):
@@ -85,7 +83,7 @@ If there is some value, the current session is authenticated, if not - you shoul
 (calling `client.authorizationUrl(state, session_manager)`, where [`state`](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest) is a random unique value).
 You also need to implement a `callback endpoint`, which is the same as in [OidcClientOptions](#oidc_client_options) to receive a server response. 
 In a callback endpoint you should call `client.authorizationCallback(request_query_params, session_manager)`, where `request_query_params` is a current request query parameters. 
-As a result, you should have an authenticated session.
+The method will return a current `subject` and an `access_token`. After this, you should have an authenticated session.
 
 For more examples see [test-client.ts](./test/test-client.ts).
 
