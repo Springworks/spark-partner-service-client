@@ -28,7 +28,7 @@ export interface IssuerConfig {
   authorization_endpoint: string;
   token_endpoint: string;
   jwks_uri?: string;
-  id_token_signed_response_alg?: string;
+  id_token_signed_response_alg?: 'HS256' | 'RS256';
 }
 
 export class SparkOidcClient {

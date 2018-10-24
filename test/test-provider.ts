@@ -1,7 +1,7 @@
 import Router = require('koa-router');
 import OIDCProvider = require('oidc-provider');
+import { IssuerConfig, OidcClientOptions } from '../src';
 import { TOKEN_ENDPOINT_AUTH_METHOD } from '../src/consts';
-import { OidcClientOptions } from '../src';
 
 export class TestOidcProvider {
   private oidc_server: any;
@@ -60,7 +60,7 @@ export class TestOidcProvider {
     this.oidc_server.close();
   }
 
-  public getIssuerConfig() {
+  public getIssuerConfig(): IssuerConfig {
     return {
       issuer: this.base_url,
       authorization_endpoint: `${this.base_url}/auth`,
