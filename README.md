@@ -50,6 +50,7 @@ Here is an example of `SessionManager` using [hapi framework](https://hapijs.com
 
 ```typescript
 const SDK_SESSION_COOKIE_NAME = 'sdk_session';
+
 class HapiSessionManager implements SessionManager {
   constructor(private request: Request, private h: ResponseToolkit) {}
 
@@ -76,6 +77,7 @@ class SparkOidcClient {
   authorizationHeader(session_manager: SessionManager): Promise<string>;
   authorizationUrl(state: string, session_manager: SessionManager): Promise<string>;
   currentSubject(session_manager: SessionManager): Promise<string | null>;
+}
 ```
 
 To check if current session is authenticated, you can call `client.currentSubject(session_manager)` or `client.authorizationHeader(session_manager)`.
@@ -99,6 +101,7 @@ interface IssuerConfig {
   jwks_uri?: string;
   id_token_signed_response_alg?: 'HS256' | 'RS256';
 }
+
 class SparkOidcClient {
   constructor(options: OidcClientOptions, issuer_config: IssuerConfig);
 }
