@@ -11,7 +11,7 @@ import {
   TOKEN_ENDPOINT_AUTH_SIGNING_ALG,
 } from './consts';
 
-export interface OidcClientOptions {
+export interface SparkPartnerServiceClientOptions {
   client_id: string;
   client_secret: string;
   callback_url: string;
@@ -23,7 +23,7 @@ export interface SessionManager {
   storeInSession(key: string, value: string): Promise<void>;
 }
 
-export interface IssuerConfig {
+export interface SparkOidcIssuerConfig {
   issuer: string;
   authorization_endpoint: string;
   token_endpoint: string;
@@ -31,11 +31,11 @@ export interface IssuerConfig {
   id_token_signed_response_alg?: 'HS256' | 'RS256';
 }
 
-export class SparkOidcClient {
+export class SparkPartnerServiceClient {
   private backing_oidc_client: Client;
   private encryption_key: string;
 
-  constructor(private options: OidcClientOptions, issuer_config: IssuerConfig = GATEWAY_CONFIG) {
+  constructor(private options: SparkPartnerServiceClientOptions, issuer_config: SparkOidcIssuerConfig = GATEWAY_CONFIG) {
     this.backing_oidc_client = this.createBackingClient(options, issuer_config);
     this.encryption_key = createHash('sha512')
       .update(options.client_secret, 'utf8')
@@ -119,7 +119,7 @@ export class SparkOidcClient {
 
   private createBackingClient(
     { client_id, client_secret }: { client_id: string; client_secret: string },
-    issuer_config: IssuerConfig,
+    issuer_config: SparkOidcIssuerConfig,
   ) {
     const issuer = new Issuer({
       issuer: issuer_config.issuer,

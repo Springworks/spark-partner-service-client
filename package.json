@@ -1,6 +1,6 @@
 {
-  "name": "@springworks/spark-oidc-client",
-  "description": "OIDC client with prefilled configuration to Service Provider Gateway API.",
+  "name": "@springworks/spark-partner-service-client",
+  "description": "SPARK Partner Service OIDC client.",
   "version": "1.0.0",
   "main": "index.js",
   "types": "index.d.ts",
