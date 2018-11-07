@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto';
 import { Request, RequestQuery, ResponseToolkit, Server } from 'hapi';
-import { IssuerConfig, OidcClientOptions, SessionManager, SparkOidcClient } from '../src';
+import { SparkOidcIssuerConfig, SparkPartnerServiceClientOptions, SessionManager, SparkPartnerServiceClient } from '../src';
 
 class TestSessionManager implements SessionManager {
   constructor(private request: Request, private h: ResponseToolkit) {}
@@ -20,8 +20,8 @@ class TestSessionManager implements SessionManager {
 /* tslint:disable:max-classes-per-file  */
 export class TestClient {
   private server: Server;
-  private oidc_client?: SparkOidcClient;
-  private oidc_client_options?: OidcClientOptions;
+  private oidc_client?: SparkPartnerServiceClient;
+  private oidc_client_options?: SparkPartnerServiceClientOptions;
 
   constructor() {
     this.server = new Server({ host: '0.0.0.0', port: 0 });
@@ -75,9 +75,9 @@ export class TestClient {
     ]);
   }
 
-  public async start(issuer_config: IssuerConfig) {
+  public async start(issuer_config: SparkOidcIssuerConfig) {
     await this.server.start();
-    this.oidc_client = new SparkOidcClient(this.getOidcClientOptions(), issuer_config);
+    this.oidc_client = new SparkPartnerServiceClient(this.getOidcClientOptions(), issuer_config);
   }
 
   public async stop() {

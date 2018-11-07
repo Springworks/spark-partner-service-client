@@ -1,6 +1,6 @@
 import Router = require('koa-router');
 import OIDCProvider = require('oidc-provider');
-import { IssuerConfig, OidcClientOptions } from '../src';
+import { SparkOidcIssuerConfig, SparkPartnerServiceClientOptions } from '../src';
 import { TOKEN_ENDPOINT_AUTH_METHOD } from '../src/consts';
 
 export class TestOidcProvider {
@@ -10,7 +10,7 @@ export class TestOidcProvider {
     this.base_url = `http://localhost:${this.port}`;
   }
 
-  public async start(client_options: OidcClientOptions) {
+  public async start(client_options: SparkPartnerServiceClientOptions) {
     const oidc = new OIDCProvider(this.base_url);
     const router = new Router();
     router.use(async (ctx: Router.IRouterContext, next: () => Promise<any>) => {
@@ -60,7 +60,7 @@ export class TestOidcProvider {
     this.oidc_server.close();
   }
 
-  public getIssuerConfig(): IssuerConfig {
+  public getIssuerConfig(): SparkOidcIssuerConfig {
     return {
       issuer: this.base_url,
       authorization_endpoint: `${this.base_url}/auth`,
