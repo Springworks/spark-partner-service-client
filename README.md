@@ -10,10 +10,10 @@ yarn add @springworks/spark-oidc-client
 
 ## API Reference
 * [Introduction](#introduction)
-* [Service Provider options](#oidc-client-options )
-* [SessionManager](#session-manager)
-* [How to use sdk](#spark-oidc-client)
-* [How to test a client](#test-with-spark-oidc-client)
+* [Service Provider options](#service-provider-options)
+* [Session Manager](#session-manager)
+* [How to use sdk](#how-to-use-sdk)
+* [How to test a client](#how-to-test-a-client)
 
 
 ## Introduction
@@ -21,7 +21,7 @@ yarn add @springworks/spark-oidc-client
 This is a wrapper of an existed [openid-client](https://www.npmjs.com/package/openid-client) sdk, which prefills some our `Service Provider Gateway`'s parameters.
 It is also do some boilerplate checks and provide with useful method for a getting current subject and `Service Provider Gateway` Authorization header.
 
-### Service Provider options
+## Service Provider options
 
 To be able to use our [OpenID Connect](https://openid.net/connect/) interpretation, the user needs to specify client options:
 ```typescript
@@ -34,7 +34,7 @@ interface OidcClientOptions {
 
 where `client_id` and `client_secret` should be provider by `Service Provider Gateway` and `callback_url` is an url, to which the response with Authorization Code will be sent.
 
-### SessionManager
+## Session Manager
 
 `spark-oidc-client` provides some intermediate OAuth 2.0 flow checks (`state` parameter) and store some useful data (current `subject` and `access_token`) to reduce code's copy-pastes.
 Thus, the user needs to implement the `SessionManager` interface:
@@ -67,9 +67,9 @@ class HapiSessionManager implements SessionManager {
 }
 ```
 
-### How to use sdk
+## How to use sdk
 
-To use `spark-oidc-client` sdk you need to create an instance of `SparkOidcClient` class with predefined [OidcClientOptions](#oidc_client_options):
+To use `spark-oidc-client` sdk you need to create an instance of `SparkOidcClient` class with predefined [OidcClientOptions](#service-provider-options):
 ```typescript
 class SparkOidcClient {
   constructor(options: OidcClientOptions);
@@ -83,13 +83,13 @@ class SparkOidcClient {
 To check if current session is authenticated, you can call `client.currentSubject(session_manager)` or `client.authorizationHeader(session_manager)`.
 If there is some value, the current session is authenticated, if not - you should start authorization by redirecting to `Service Provider Gateway`'s authorization url
 (calling `client.authorizationUrl(state, session_manager)`, where [`state`](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest) is a random unique value).
-You also need to implement a `callback endpoint`, which is the same as in [OidcClientOptions](#oidc_client_options) to receive a server response. 
+You also need to implement a `callback endpoint`, which is the same as in [OidcClientOptions](#service-provider-options) to receive a server response. 
 In a callback endpoint you should call `client.authorizationCallback(request_query_params, session_manager)`, where `request_query_params` is a current request query parameters. 
 The method will return a current `subject` and an `access_token`. After this, you should have an authenticated session.
 
 For more examples see [test-client.ts](./test/test-client.ts).
 
-### How to test a client
+## How to test a client
 
 To test a your service with our sdk, you can start your own [oidc-provider](https://www.npmjs.com/package/oidc-provider) and create `SparkOidcClient` with a `IssuerConfig` parameter:
 
