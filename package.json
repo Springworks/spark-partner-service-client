@@ -5,7 +5,6 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-
     "lint": "tslint --project tsconfig.json",
     "fix": "tslint --project tsconfig.json --fix",
     "test": "jest",
@@ -21,7 +20,7 @@
     "@types/iron": "^5.0.1",
     "@types/jest": "^23.3.7",
     "@types/koa-router": "^7.0.32",
-    "@types/node": "^10.12.0",
+    "@types/node": "^12",
     "@types/request": "^2.47.1",
     "get-port": "^4.0.0",
     "hapi": "^17.6.0",
@@ -37,9 +36,6 @@
     "tslint-plugin-prettier": "^2.0.0",
     "typescript": "^3.1.1",
     "typestrict": "^1.0.1"
-  },
-  "engines": {
-    "node": "^10.11.0"
   },
   "license": "MIT",
   "repository": "git@github.com:Springworks/spark-oidc-client.git",
